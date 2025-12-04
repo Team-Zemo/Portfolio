@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+/* ensure no gaps between full-screen sections */
+section { min-height: 100vh; }
+
+/* nice glassy subtle shadow for hero layers */
+.zemo-glass {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px) saturate(120%);
+}
+
+/* motion-blur-like (cheap) — used briefly during wipe */
+.zemo-motion-blur { filter: blur(6px) contrast(1.02); }
+* {
+  overflow-x: clip !important;
+}
