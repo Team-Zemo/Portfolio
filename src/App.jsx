@@ -73,10 +73,6 @@ export default function App() {
         </div>
       )}
 
-      {/* 2. HOMEPAGE (MUST RENDER ALWAYS)
-         This must be rendered so the <Canvas> inside it initializes 
-         and starts the useProgress hook.
-      */}
       <div className={!fullyLoaded ? "opacity-0 pointer-events-none" : "opacity-100 transition-opacity duration-1000"}>
         <HomePage 
           setProgress={setProgress} 
