@@ -96,7 +96,7 @@ return (
         {/* WIPE PANEL */}
         <div
             ref={panelRef}
-            className="absolute inset-0 bg-black z-20"
+            className="absolute inset-0 bg-gray-900 z-20"
         />
 
         {/* CONTENT */}
@@ -105,7 +105,7 @@ return (
             className="absolute inset-0 flex flex-col items-center justify-center text-center p-10 text-white z-30"
         >
             <h1 className="text-6xl font-extrabold">
-                The Next Chapter
+                Meet The Team
             </h1>
             <p className="text-xl mt-6 max-w-2xl">
                 Discipline. Precision. Dominance. This is where Team Zemo truly begins.

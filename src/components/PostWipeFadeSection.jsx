@@ -34,7 +34,7 @@ const PostWipeFadeSection = () => {
     >
       <div className="max-w-3xl text-center space-y-6">
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900">
-          Join Team Zemo
+          Follow Team Zemo
         </h1>
 
         <p className="text-lg md:text-2xl text-gray-600 leading-relaxed">
@@ -42,10 +42,12 @@ const PostWipeFadeSection = () => {
           If these words mean something to you,  
           you already think like one of us.
         </p>
+<a href="https://github.com/Team-Zemo" target="_blank" rel="noopener noreferrer">
 
-        <button className="mt-6 px-10 py-4 bg-black text-white font-bold text-lg rounded-lg hover:bg-gray-800 transition-all duration-300">
+        <button className="mt-6 px-10 py-4 bg-black text-white font-bold text-lg rounded-lg hover:bg-gray-800 transition-all duration-300 z-50">
           Become a Member
         </button>
+</a>
       </div>
     </section>
   );

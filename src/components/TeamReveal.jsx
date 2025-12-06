@@ -6,11 +6,11 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const TEAM = [
-  { name: "Uday Khare", role: "Lead Developer", img: "/team/uday.jpg" },
-  { name: "Sai Harsha", role: "Backend Specialist", img: "/team/sai.jpg" },
-  { name: "Aman Gupta", role: "3D Model Engineer", img: "/team/aman.jpg" },
-  { name: "Rishabh Singh", role: "Frontend Magician", img: "/team/rishabh.jpg" },
-  { name: "Arnav Patel", role: "AI/ML Researcher", img: "/team/arnav.jpg" },
+  { name: "Uday Khare", role: "DevOPs Wizard", img: "/team/uday.jpg" },
+  { name: "Ratan Tiwari", role: "Backend Specialist", img: "/team/sai.jpg" },
+  { name: "Tanishq Tiwari", role: "Frontend Designer ", img: "/team/TanishqCharacter.png" },
+  { name: "Surendra Singh Chouhan", role: "Backend Architect", img: "/team/rishabh.jpg" },
+  { name: "Yadveer Singh Pawar", role: "UI Developer", img: "/team/arnav.jpg" },
 ];
 
 const TeamReveal = () => {
@@ -102,13 +102,13 @@ const TeamReveal = () => {
     <section
       ref={containerRef}
       id="team-transition"
-      className="relative min-h-screen w-full overflow-hidden bg-gray-100"
+      className="relative min-h-screen w-full overflow-hidden bg-gray-300"
     >
       {/* BACKGROUND BARS */}
       <div className="absolute inset-0 grid grid-cols-5 px-4 md:px-10 z-10 gap-2 md:gap-4">
         {TEAM.map((_, i) => (
           <div key={i} className="flex justify-center h-full">
-            <div className="team-bar w-full max-w-[15vw] h-full bg-black origin-top" />
+            <div className="team-bar w-full max-w-[15vw] h-full bg-gray-900 origin-top" />
           </div>
         ))}
       </div>
@@ -123,7 +123,7 @@ const TeamReveal = () => {
             key={index}
             className="member-item flex flex-col items-center justify-center text-center text-white h-full"
           >
-            <div className="w-full max-w-[12vw] aspect-[3/4] overflow-hidden mb-6 bg-gray-800">
+            <div className="w-full max-w-[12vw]  overflow-hidden mb-6 ">
               {member.img ? (
                 <img
                   src={member.img}

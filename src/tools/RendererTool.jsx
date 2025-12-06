@@ -36,7 +36,7 @@ export default function RendererTool({ children, onProgress, onLoaded }) {
       shadows
       camera={{ position: [0, 0, 5], fov: 35 }}
       gl={{ antialias: true, alpha: true }}
-      style={{ width: "100%", height: "100%", background: "transparent" }}
+      style={{ width: "100%", height: "100%", background: "transparent" , pointerEvents: "none"}}
     >
       <StableCanvasSize />
 
