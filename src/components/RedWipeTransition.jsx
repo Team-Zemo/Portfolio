@@ -7,38 +7,51 @@ gsap.registerPlugin(ScrollTrigger);
 
 const RedWipeTransition = () => {
   const panelRef = useRef(null);
-  const textRef = useRef(null);
   const wrapperRef = useRef(null);
+  const lettersRef = useRef([]);
 
   useEffect(() => {
     const panel = panelRef.current;
-    const text = textRef.current;
     const wrapper = wrapperRef.current;
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: wrapper,
-        start: "top top",      // 🔥 Triggers EXACTLY when TeamReveal unpins
-        end: "+=150%",         // 🔥 Full wipe enter + pause + exit
+        start: "top top",
+        end: "+=150%",
         scrub: 1.2,
         pin: true,
         pinSpacing: false,
       },
     });
 
-    // ENTER WIPE
+    // RED PANEL ENTER
     tl.fromTo(
       panel,
       { x: "-100%" },
       { x: "0%", duration: 1, ease: "power3.inOut" }
     );
 
-    // TEXT REVEAL
+    // 🔥 DUST TRAIL LETTER REVEAL
     tl.fromTo(
-      text,
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" },
-      "-=0.5"
+      lettersRef.current,
+      {
+        y: 80,
+        opacity: 0,
+        scaleY: 0.3,
+        transformOrigin: "center bottom",
+        filter: "blur(6px)",
+      },
+      {
+        y: 0,
+        opacity: 1,
+        scaleY: 1,
+        filter: "blur(0px)",
+        duration: 0.75,
+        ease: "back.out(1.7)",
+        stagger: 0.07,
+      },
+      "-=0.3"
     );
 
     // EXIT WIPE
@@ -47,8 +60,9 @@ const RedWipeTransition = () => {
       duration: 1.1,
       ease: "power3.inOut",
     });
-
   }, []);
+
+  const text = "TEAM ZEMO";
 
   return (
     <section
@@ -60,11 +74,16 @@ const RedWipeTransition = () => {
         ref={panelRef}
         className="absolute inset-0 bg-red-600 flex items-center justify-center z-30"
       >
-        <h1
-          ref={textRef}
-          className="text-white text-6xl md:text-9xl font-extrabold tracking-widest"
-        >
-          TEAM ZEMO
+        <h1 className="text-white text-6xl md:text-9xl font-extrabold tracking-widest flex gap-1">
+          {text.split("").map((char, i) => (
+            <span
+              key={i}
+              ref={(el) => (lettersRef.current[i] = el)}
+              className="inline-block"
+            >
+              {char === " " ? "\u00A0" : char}
+            </span>
+          ))}
         </h1>
       </div>
     </section>
