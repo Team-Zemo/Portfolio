@@ -16,9 +16,9 @@ const HomePage = ({ setProgress, setModelLoaded }) => {
     const videoRef = useRef(null);
   const ctrl = useRef({
     x: 0,
-    y: -0.6,
+    y: -0.4,
     z: 0,
-    scale: 1.3,
+    scale: 0.9,
     rotationY: 0,
   });
 
@@ -48,7 +48,7 @@ const HomePage = ({ setProgress, setModelLoaded }) => {
 
         // PHASE 2 → shrink + fly to top-left (quote → exit)
         .to(obj, {
-          x: -3.3,
+          x: -3.1,
           y: 1.3,
           scale: 0.18,
           ease: "power1.inOut",
