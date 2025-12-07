@@ -72,10 +72,12 @@ export default function FooterReveal() {
           <p className="text-gray-300">
             Precision. Discipline. Excellence.
           </p>
+<a href="https://github.com/Team-Zemo" target="_blank" rel="noopener noreferrer">
 
           <p className="text-gray-500 text-sm mt-8">
             © {new Date().getFullYear()} Team Zemo
           </p>
+</a>
         </div>
       </div>
     </section>

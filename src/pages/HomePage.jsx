@@ -18,7 +18,7 @@ const HomePage = ({ setProgress, setModelLoaded }) => {
     x: 0,
     y: -0.4,
     z: 0,
-    scale: 0.9,
+    scale: 1.1,
     rotationY: 0,
   });
 
@@ -48,7 +48,7 @@ const HomePage = ({ setProgress, setModelLoaded }) => {
 
         // PHASE 2 → shrink + fly to top-left (quote → exit)
         .to(obj, {
-          x: -3.1,
+          x: -3.3,
           y: 1.3,
           scale: 0.18,
           ease: "power1.inOut",
@@ -105,7 +105,7 @@ useEffect(() => {
   tl.to(obj, {
     x: 1.5,       // move model to right side
     y: -0.7,      // same vertical position as hero
-    scale: 1.3,   // full size again
+    scale: 1.1,   // full size again
     rotationY: 0, // reset rotation
     ease: "ease3.out",
     duration: 1.5,
