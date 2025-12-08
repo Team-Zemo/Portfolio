@@ -36,7 +36,7 @@ const TEAM = [
   },
   {
     name: "Yadveer Singh Pawar",
-    role: "UI Developer",
+    role: "Fullstack Developer",
     img: "/team/YadveerCharacter.png",
     codeName: "Cipher",
     github: "https://github.com/Yadveer1",
