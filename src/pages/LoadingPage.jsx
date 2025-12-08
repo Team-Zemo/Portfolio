@@ -55,13 +55,12 @@ const LoadingPage = ({ progress: progressProp }) => {
   return (
     <div className="min-h-screen w-full flex items-center justify-center flex-col bg-transparent select-none">
       <div className="relative text-center leading-tight tracking-tight">
-        
         {/* Outline text */}
         <div
           className="text-5xl md:text-[9rem] font-extrabold hero-text"
           style={{
             color: "transparent",
-            WebkitTextStroke: "2px #0f172a",
+            WebkitTextStroke: "3px #0f172a",
           }}
         >
           Team Zemo
