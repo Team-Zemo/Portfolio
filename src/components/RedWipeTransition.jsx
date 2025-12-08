@@ -18,10 +18,9 @@ const RedWipeTransition = () => {
       scrollTrigger: {
         trigger: wrapper,
         start: "top top",
-        end: "+=150%",
-        scrub: 1.2,
+        end: "+=200%", // Increased scroll distance for better pacing
+        scrub: 1,
         pin: true,
-        pinSpacing: false,
       },
     });
 
@@ -32,32 +31,33 @@ const RedWipeTransition = () => {
       { x: "0%", duration: 1, ease: "power3.inOut" }
     );
 
-    // 🔥 DUST TRAIL LETTER REVEAL
+    // 🔥 TEXT REVEAL ANIMATION
     tl.fromTo(
       lettersRef.current,
       {
-        y: 80,
+        y: 100,
         opacity: 0,
-        scaleY: 0.3,
-        transformOrigin: "center bottom",
-        filter: "blur(6px)",
+        scale: 0.5,
+        filter: "blur(10px)",
       },
       {
         y: 0,
         opacity: 1,
-        scaleY: 1,
+        scale: 1,
         filter: "blur(0px)",
-        duration: 0.75,
+        duration: 0.8,
         ease: "back.out(1.7)",
-        stagger: 0.07,
-      },
-      "-=0.3"
+        stagger: 0.05,
+      }
     );
+
+    // PAUSE TO READ TEXT
+    tl.to({}, { duration: 0.5 });
 
     // EXIT WIPE
     tl.to(panel, {
       x: "100%",
-      duration: 1.1,
+      duration: 1,
       ease: "power3.inOut",
     });
   }, []);
@@ -74,7 +74,7 @@ const RedWipeTransition = () => {
         ref={panelRef}
         className="absolute inset-0 bg-red-600 flex items-center justify-center z-30"
       >
-        <h1 className="text-white text-6xl md:text-9xl font-extrabold tracking-widest flex gap-1">
+        <h1 className="text-white text-[10vw] md:text-9xl font-extrabold tracking-widest flex flex-wrap justify-center gap-1 w-full">
           {text.split("").map((char, i) => (
             <span
               key={i}

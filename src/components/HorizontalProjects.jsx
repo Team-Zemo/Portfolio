@@ -4,7 +4,6 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// PROJECT DATA (unchanged)
 const projects = [
   {
     id: 1,
@@ -12,45 +11,47 @@ const projects = [
     subtitle: "Team Zemo / Infrastructure Layer",
     tech: "Spring Boot • Modular Runtime • AI Voice Stack",
     description: [
-      "Speech-enabled backend architecture.",
-      "Adaptive modular runtime for AI pipelines.",
-      "Hierarchical NoteManager workflow system.",
-      "AI chat with memory threads."
+      "Speech-enabled backend architecture for realtime AI voice workflows.",
+      "Adaptive modular runtime for AI pipelines and multi-agent flows.",
+      "Hierarchical NoteManager workflow system for advanced task routing.",
+      "AI chat engine with persistent contextual memory threads.",
     ],
     links: [
       { label: "Backend Repo", url: "https://github.com/Team-Zemo/omninet-core" },
-      { label: "Frontend Repo", url: "https://github.com/Team-Zemo/omninet-security-web" }
+      { label: "Frontend Repo", url: "https://github.com/Team-Zemo/omninet-security-web" },
     ],
   },
+
   {
     id: 2,
     title: "Aeigies Core",
     subtitle: "AI Misuse Detection / Security Engine",
     tech: "Realtime Defense • Pattern Rules • Enforcement Layer",
     description: [
-      "Prompt misuse detection + leakage prevention.",
-      "Attack signature mapping.",
-      "Policy enforcement with auditing."
+      "High-speed prompt misuse detection with multilayer auditing.",
+      "Attack signature mapping and realtime prompt pattern analysis.",
+      "Dynamic policy enforcement engine with hardened rule responses.",
     ],
     links: [
       { label: "Backend Repo", url: "https://github.com/Team-Zemo/aeigies-core" },
-      { label: "Frontend Repo", url: "https://github.com/Team-Zemo/Aeigis-Frontend" }
+      { label: "Frontend Repo", url: "https://github.com/Team-Zemo/Aeigis-Frontend" },
     ],
   },
+
   {
     id: 3,
     title: "Swayog",
     subtitle: "Pose Engine / Live CV Feedback",
     tech: "FastAPI • Realtime CV • Socket Streams",
     description: [
-      "ML posture detection.",
-      "Live webcam correction.",
-      "Low-latency socket feedback pipeline."
+      "AI-driven posture analysis engine designed for realtime corrective feedback.",
+      "Advanced OpenCV + keypoint estimation pipeline tuned for stability and accuracy.",
+      "Built for fitness apps, physiotherapy, motion training, and interactive movement coaching.",
     ],
     links: [
-      { label: "Project Repo", url: "https://github.com/Team-Zemo/Swayog" }
+      { label: "Project Repo", url: "https://github.com/Team-Zemo/Swayog" },
     ],
-  }
+  },
 ];
 
 const HorizontalProjects = () => {
@@ -60,157 +61,99 @@ const HorizontalProjects = () => {
   useEffect(() => {
     const container = containerRef.current;
     const wrapper = wrapperRef.current;
+    if (!container || !wrapper) return;
 
-    const totalPanels = projects.length;
-    const scrollWidth = (totalPanels - 1) * window.innerWidth;
+    const panels = gsap.utils.toArray(".project-panel");
+    const totalPanels = panels.length;
+    const totalWidth = (totalPanels - 1) * window.innerWidth;
 
-    // horizontal scroll
-    const mainScroll = gsap.to(wrapper, {
-      x: -scrollWidth,
+    ScrollTrigger.getAll().forEach(t => t.kill());
+
+    gsap.to(wrapper, {
+      x: () => -totalWidth,
       ease: "none",
       scrollTrigger: {
         trigger: container,
         pin: true,
-        scrub: 0.5,
+        scrub: 1,
         start: "top top",
-        end: "+=" + scrollWidth,
+        end: "+=" + totalWidth,
         snap: 1 / (totalPanels - 1),
+        invalidateOnRefresh: true,
       },
     });
 
-    // Clean slide-in for each panel
-    gsap.utils.toArray(".project-panel").forEach((panel) => {
-      gsap.fromTo(
-        panel,
-        { opacity: 0.3, x: 120 },
-        {
-          opacity: 1,
-          x: 0,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: panel,
-            containerAnimation: mainScroll,
-            start: "left center",
-            end: "right center",
-            scrub: true,
-          },
-        }
-      );
-    });
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 200);
 
-    // Subtitle animation from the right
-    gsap.utils.toArray(".subtitle-anim").forEach((sub) => {
-      gsap.fromTo(
-        sub,
-        { opacity: 0, x: 80 },
-        {
-          opacity: 1,
-          x: 0,
-          ease: "power2.out",
-          duration: 1,
-          scrollTrigger: {
-            trigger: sub,
-            containerAnimation: mainScroll,
-            start: "left center",
-            end: "right center",
-            scrub: true,
-          },
-        }
-      );
-    });
-
-    // Background darkening when fully centered
-    gsap.utils.toArray(".project-panel").forEach((panel) => {
-      gsap.fromTo(
-        panel,
-        { backgroundColor: "#0a0d12" },
-        {
-          backgroundColor: "#111827",
-          ease: "none",
-          scrollTrigger: {
-            trigger: panel,
-            containerAnimation: mainScroll,
-            start: "center center",
-            end: "center center",
-            scrub: true,
-          }
-        }
-      );
-    });
-
-    return () => ScrollTrigger.getAll().forEach((s) => s.kill());
+    return () => ScrollTrigger.getAll().forEach(t => t.kill());
   }, []);
 
   return (
     <section
-      id="horizontal-projects-start"
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden text-white"
+      className="relative w-full h-screen overflow-hidden bg-[#0a0d12] text-white"
     >
       <div
         ref={wrapperRef}
-        className="flex h-full"
-        style={{ width: `${projects.length * 100}vw` }}
+        className="flex h-screen"
+        style={{ width: "max-content" }}
       >
-        {projects.map((p, i) => (
+
+        {projects.map((p) => (
           <div
-            key={i}
-            className="project-panel w-screen h-full flex items-center justify-center px-20"
-            style={{ backgroundColor: "#0a0d12" }}
+            key={p.id}
+            className="
+              project-panel 
+              w-screen 
+              h-screen 
+              flex items-center 
+              justify-center 
+              px-8 md:px-20
+            "
           >
-            <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-12 gap-16">
 
-              {/* LEFT SIDE */}
-              <div className="left-block md:col-span-8 space-y-8">
+            {/* DESKTOP */}
+            <div className="hidden md:grid md:grid-cols-12 md:gap-16 max-w-6xl w-full">
 
-                <span className="subtitle-anim text-xs tracking-widest text-blue-300 uppercase">
-                  {p.subtitle}
-                </span>
-
-                <h2 className="text-6xl font-semibold tracking-tight">{p.title}</h2>
-
-                <p className="text-sm text-gray-300">{p.tech}</p>
-
-                <div className="space-y-4">
-                  {p.description.map((line, idx) => (
-                    <div key={idx} className="flex items-start gap-3">
-                      <span className="mt-2 w-2 h-2 rounded-full bg-blue-300/70"></span>
-                      <p className="text-lg text-gray-300">{line}</p>
-                    </div>
+              {/* LEFT */}
+              <div className="col-span-8 flex flex-col justify-center space-y-6">
+                <p className="text-blue-300 text-xs uppercase tracking-widest">{p.subtitle}</p>
+                <h2 className="text-5xl font-bold">{p.title}</h2>
+                <p className="text-gray-300 text-base">{p.tech}</p>
+                <div className="w-full h-[1px] bg-white/10 my-3" />
+                <div className="space-y-3">
+                  {p.description.map((line, i) => (
+                    <p key={i} className="text-gray-300 text-lg leading-relaxed">{line}</p>
                   ))}
                 </div>
               </div>
 
-              {/* RIGHT SIDE */}
-              <div className="right-block md:col-span-4">
-                <div className="bg-black/50 p-8 rounded-lg border border-blue-400/20 shadow-xl">
-                  <h3 className="text-sm font-bold text-blue-300 uppercase tracking-wider mb-4">
-                    Repositories
-                  </h3>
-
+              {/* RIGHT */}
+              <div className="col-span-4 flex flex-col justify-center">
+                <div className="bg-black/40 border border-blue-400/20 p-8 rounded-2xl shadow-xl space-y-4">
+                  <h3 className="text-blue-300 text-sm uppercase tracking-wider">Repositories</h3>
                   <div className="flex flex-col gap-4">
-                    {p.links.map((l, idx) => (
+                    {p.links.map((lnk, i) => (
                       <a
-                        key={idx}
-                        href={l.url}
+                        key={i}
+                        href={lnk.url}
                         target="_blank"
-                        className="group flex justify-between py-3 px-4 bg-black/40 hover:bg-black/60 border border-blue-400/20 hover:border-blue-300/40 rounded transition-all"
+                        className="
+                          bg-black/40 
+                          border border-blue-300/30 
+                          hover:bg-black/60 
+                          transition-all 
+                          rounded-full 
+                          px-6 py-3 
+                          flex items-center justify-between
+                        "
                       >
-                        <span className="text-gray-300 group-hover:text-white">{l.label}</span>
-
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="text-blue-300 group-hover:text-blue-200"
-                        >
-                          <line x1="7" y1="17" x2="17" y2="7" />
-                          <polyline points="7 7 17 7 17 17" />
+                        {lnk.label}
+                        <svg width='18' height='18' fill='none' stroke='currentColor' strokeWidth='2'>
+                          <line x1='7' y1='17' x2='17' y2='7' />
+                          <polyline points='7 7 17 7 17 17' />
                         </svg>
                       </a>
                     ))}
@@ -219,8 +162,55 @@ const HorizontalProjects = () => {
               </div>
 
             </div>
+
+            {/* MOBILE (LEFT-ALIGNED, FIXED TOP SPACING) */}
+            <div className="md:hidden max-w-xl w-full px-4 pt-16 space-y-8 text-left">
+
+              <p className="text-[11px] tracking-widest text-blue-300 uppercase">{p.subtitle}</p>
+
+              <h2 className="text-4xl font-extrabold leading-tight">{p.title}</h2>
+
+              <p className="text-gray-300 text-sm">{p.tech}</p>
+
+              <div className="w-full h-[1px] bg-white/10" />
+
+              <div className="space-y-4">
+                {p.description.map((line, i) => (
+                  <p key={i} className="text-gray-300 text-[15px] leading-[1.6]">{line}</p>
+                ))}
+              </div>
+
+              <div className="flex flex-col gap-4 pt-4 pb-10">
+                {p.links.map((lnk, i) => (
+                  <a
+                    key={i}
+                    href={lnk.url}
+                    target="_blank"
+                    className="
+                      bg-black/50 
+                      border border-blue-400/40 
+                      hover:bg-black/60 
+                      rounded-full 
+                      px-6 py-3 
+                      text-sm 
+                      flex items-center justify-between
+                      active:scale-[0.97]
+                    "
+                  >
+                    {lnk.label}
+                    <svg width='18' height='18' fill='none' stroke='currentColor' strokeWidth='2'>
+                      <line x1='7' y1='17' x2='17' y2='7' />
+                      <polyline points='7 7 17 7 17 17' />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+
+            </div>
+
           </div>
         ))}
+
       </div>
     </section>
   );

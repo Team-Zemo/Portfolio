@@ -11,6 +11,10 @@ section { min-height: 100vh; }
 
 /* motion-blur-like (cheap) — used briefly during wipe */
 .zemo-motion-blur { filter: blur(6px) contrast(1.02); }
-* {
+/* * {
   overflow-x: clip !important;
+} */
+
+::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
 }
