@@ -17,8 +17,14 @@ const projects = [
       "AI chat engine with persistent contextual memory threads.",
     ],
     links: [
-      { label: "Backend Repo", url: "https://github.com/Team-Zemo/omninet-core" },
-      { label: "Frontend Repo", url: "https://github.com/Team-Zemo/omninet-security-web" },
+      {
+        label: "Backend Repo",
+        url: "https://github.com/Team-Zemo/omninet-core",
+      },
+      {
+        label: "Frontend Repo",
+        url: "https://github.com/Team-Zemo/omninet-security-web",
+      },
     ],
   },
 
@@ -33,8 +39,14 @@ const projects = [
       "Dynamic policy enforcement engine with hardened rule responses.",
     ],
     links: [
-      { label: "Backend Repo", url: "https://github.com/Team-Zemo/aeigies-core" },
-      { label: "Frontend Repo", url: "https://github.com/Team-Zemo/Aeigis-Frontend" },
+      {
+        label: "Backend Repo",
+        url: "https://github.com/Team-Zemo/aeigies-core",
+      },
+      {
+        label: "Frontend Repo",
+        url: "https://github.com/Team-Zemo/Aeigis-Frontend",
+      },
     ],
   },
 
@@ -67,9 +79,7 @@ const HorizontalProjects = () => {
     const totalPanels = panels.length;
     const totalWidth = (totalPanels - 1) * window.innerWidth;
 
-    ScrollTrigger.getAll().forEach(t => t.kill());
-
-    gsap.to(wrapper, {
+    const tween = gsap.to(wrapper, {
       x: () => -totalWidth,
       ease: "none",
       scrollTrigger: {
@@ -78,7 +88,10 @@ const HorizontalProjects = () => {
         scrub: 1,
         start: "top top",
         end: "+=" + totalWidth,
-        snap: 1 / (totalPanels - 1),
+        // Disable snapping on mobile for smoother scrolling
+        snap: window.matchMedia("(min-width: 768px)").matches
+          ? 1 / (totalPanels - 1)
+          : false,
         invalidateOnRefresh: true,
       },
     });
@@ -87,7 +100,10 @@ const HorizontalProjects = () => {
       ScrollTrigger.refresh();
     }, 200);
 
-    return () => ScrollTrigger.getAll().forEach(t => t.kill());
+    return () => {
+      if (tween.scrollTrigger) tween.scrollTrigger.kill();
+      tween.kill();
+    };
   }, []);
 
   return (
@@ -100,7 +116,6 @@ const HorizontalProjects = () => {
         className="flex h-screen"
         style={{ width: "max-content" }}
       >
-
         {projects.map((p) => (
           <div
             key={p.id}
@@ -113,19 +128,24 @@ const HorizontalProjects = () => {
               px-8 md:px-20
             "
           >
-
             {/* DESKTOP */}
             <div className="hidden md:grid md:grid-cols-12 md:gap-16 max-w-6xl w-full">
-
               {/* LEFT */}
               <div className="col-span-8 flex flex-col justify-center space-y-6">
-                <p className="text-blue-300 text-xs uppercase tracking-widest">{p.subtitle}</p>
+                <p className="text-blue-300 text-xs uppercase tracking-widest">
+                  {p.subtitle}
+                </p>
                 <h2 className="text-5xl font-bold">{p.title}</h2>
                 <p className="text-gray-300 text-base">{p.tech}</p>
                 <div className="w-full h-[1px] bg-white/10 my-3" />
                 <div className="space-y-3">
                   {p.description.map((line, i) => (
-                    <p key={i} className="text-gray-300 text-lg leading-relaxed">{line}</p>
+                    <p
+                      key={i}
+                      className="text-gray-300 text-lg leading-relaxed"
+                    >
+                      {line}
+                    </p>
                   ))}
                 </div>
               </div>
@@ -133,7 +153,9 @@ const HorizontalProjects = () => {
               {/* RIGHT */}
               <div className="col-span-4 flex flex-col justify-center">
                 <div className="bg-black/40 border border-blue-400/20 p-8 rounded-2xl shadow-xl space-y-4">
-                  <h3 className="text-blue-300 text-sm uppercase tracking-wider">Repositories</h3>
+                  <h3 className="text-blue-300 text-sm uppercase tracking-wider">
+                    Repositories
+                  </h3>
                   <div className="flex flex-col gap-4">
                     {p.links.map((lnk, i) => (
                       <a
@@ -151,24 +173,32 @@ const HorizontalProjects = () => {
                         "
                       >
                         {lnk.label}
-                        <svg width='18' height='18' fill='none' stroke='currentColor' strokeWidth='2'>
-                          <line x1='7' y1='17' x2='17' y2='7' />
-                          <polyline points='7 7 17 7 17 17' />
+                        <svg
+                          width="18"
+                          height="18"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <line x1="7" y1="17" x2="17" y2="7" />
+                          <polyline points="7 7 17 7 17 17" />
                         </svg>
                       </a>
                     ))}
                   </div>
                 </div>
               </div>
-
             </div>
 
             {/* MOBILE (LEFT-ALIGNED, FIXED TOP SPACING) */}
             <div className="md:hidden max-w-xl w-full px-4 pt-16 space-y-8 text-left">
+              <p className="text-[11px] tracking-widest text-blue-300 uppercase">
+                {p.subtitle}
+              </p>
 
-              <p className="text-[11px] tracking-widest text-blue-300 uppercase">{p.subtitle}</p>
-
-              <h2 className="text-4xl font-extrabold leading-tight">{p.title}</h2>
+              <h2 className="text-4xl font-extrabold leading-tight">
+                {p.title}
+              </h2>
 
               <p className="text-gray-300 text-sm">{p.tech}</p>
 
@@ -176,7 +206,12 @@ const HorizontalProjects = () => {
 
               <div className="space-y-4">
                 {p.description.map((line, i) => (
-                  <p key={i} className="text-gray-300 text-[15px] leading-[1.6]">{line}</p>
+                  <p
+                    key={i}
+                    className="text-gray-300 text-[15px] leading-[1.6]"
+                  >
+                    {line}
+                  </p>
                 ))}
               </div>
 
@@ -198,19 +233,22 @@ const HorizontalProjects = () => {
                     "
                   >
                     {lnk.label}
-                    <svg width='18' height='18' fill='none' stroke='currentColor' strokeWidth='2'>
-                      <line x1='7' y1='17' x2='17' y2='7' />
-                      <polyline points='7 7 17 7 17 17' />
+                    <svg
+                      width="18"
+                      height="18"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <line x1="7" y1="17" x2="17" y2="7" />
+                      <polyline points="7 7 17 7 17 17" />
                     </svg>
                   </a>
                 ))}
               </div>
-
             </div>
-
           </div>
         ))}
-
       </div>
     </section>
   );

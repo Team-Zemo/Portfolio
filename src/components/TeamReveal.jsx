@@ -58,7 +58,7 @@ const TeamReveal = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=300%",
+          end: "+=600%", // Slowed down from 300% to 600%
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -129,7 +129,7 @@ const TeamReveal = () => {
       className="relative min-h-screen w-full overflow-hidden bg-gray-300"
     >
       {/* BARS */}
-      <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-5 px-4 md:px-10 z-10 gap-2 md:gap-4">
+      <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-5 px-0 md:px-10 z-10 gap-0 md:gap-4">
         {TEAM.map((_, i) => (
           <div key={i} className="flex justify-center h-full group">
             <div
@@ -146,7 +146,7 @@ const TeamReveal = () => {
       {/* TEAM MEMBERS */}
       <div
         id="team-members"
-        className="absolute inset-0 grid grid-cols-1 md:grid-cols-5 px-4 md:px-10 z-20 gap-2 md:gap-4 pointer-events-none overflow-y-auto md:overflow-hidden py-10 md:py-0"
+        className="absolute inset-0 grid grid-cols-1 md:grid-cols-5 px-4 md:px-10 z-20 gap-0 md:gap-4 pointer-events-none overflow-y-auto md:overflow-hidden py-10 md:py-0"
       >
         {TEAM.map((member, index) => (
           <div

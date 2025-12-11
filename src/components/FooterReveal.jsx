@@ -20,7 +20,7 @@ export default function FooterReveal() {
         trigger: section,
         start: "top bottom",
         end: "top center",
-        scrub: 1.2,
+        scrub: 0.5, // Reduced from 1.2 for tighter control
       },
     });
 
@@ -47,7 +47,7 @@ export default function FooterReveal() {
             trigger: section,
             start: "top bottom",
             end: "top center",
-            scrub: 1.2,
+            scrub: 0.5, // Reduced from 1.2
           },
         });
 
@@ -80,14 +80,17 @@ export default function FooterReveal() {
     >
       <div
         ref={panelRef}
-        className="absolute bottom-0 left-0 right-0 h-screen bg-black flex items-center justify-center"
+        className="absolute bottom-0 left-0 right-0 h-[100vh] bg-black flex flex-col justify-end md:justify-center items-center pb-24 md:pb-0 overflow-hidden"
       >
-        <div ref={textRef} className="text-center text-white space-y-4 px-6">
-          <h1 className="text-6xl md:text-9xl font-extrabold tracking-wide">
+        <div
+          ref={textRef}
+          className="text-center text-white space-y-4 px-4 w-full max-w-[95vw]"
+        >
+          <h1 className="text-[12vw] md:text-9xl font-extrabold tracking-wide leading-none break-words">
             TEAM ZEMO
           </h1>
 
-          <p className="text-xl md:text-3xl text-gray-300 font-light">
+          <p className="text-lg sm:text-xl md:text-3xl text-gray-300 font-light px-2">
             Precision. Discipline. Excellence.
           </p>
 

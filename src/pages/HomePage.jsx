@@ -89,17 +89,13 @@ const HomePage = ({ setProgress, setModelLoaded }) => {
       scrub: true,
 
       onUpdate: (self) => {
-        // scroll velocity (self.getVelocity()) gives px/sec
-        const velocity = self.getVelocity();
-
-        // convert scroll velocity to playback speed
-        // tweak the 0.002 multiplier to adjust responsiveness
-        const speed = 1 + velocity * 0.002;
-
-        // clamp speed so it never gets crazy
-        const clamped = Math.min(Math.max(speed, 0.3), 3);
-
-        vid.playbackRate = clamped;
+        // Only adjust playback rate on desktop (non-touch)
+        if (window.matchMedia("(min-width: 768px)").matches) {
+          const velocity = self.getVelocity();
+          const speed = 1 + velocity * 0.002;
+          const clamped = Math.min(Math.max(speed, 0.3), 3);
+          vid.playbackRate = clamped;
+        }
       },
     });
 
@@ -122,15 +118,15 @@ const HomePage = ({ setProgress, setModelLoaded }) => {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: "#footer-section",
-            start: "top center",
-            end: "top bottom",
-            scrub: 2,
+            start: "top bottom", // Starts when footer enters viewport
+            end: "center center", // Ends when footer is centered
+            scrub: 1, // Smooth scrubbing
           },
         });
 
         tl.to(obj, {
-          x: isMobile ? 0 : 1.5, // Mobile: center, Desktop: right
-          y: isMobile ? 0.5 : -0.7, // Mobile: slightly above center, Desktop: center-ish
+          x: isMobile ? 0 : 2.2, // Mobile: center, Desktop: corner right
+          y: isMobile ? -0.2 : -0.9, // Mobile: moved slightly up (-0.5 -> -0.2), Desktop: moved slightly up (-1.2 -> -0.9)
           scale: isMobile ? 0.65 : 1.1, // Mobile: smaller to fit, Desktop: full size
           rotationY: 0, // reset rotation
           ease: "power3.out",
