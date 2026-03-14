@@ -2,12 +2,14 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import HorizontalProjects from "../components/HorizontalProjects";
-import TeamReveal from "../components/TeamReveal";
+import AboutInitiater from "../components/AboutInitiater";
+import AboutLiftTransition from "../components/AboutLiftTransition";
+// import TeamReveal from "../components/TeamReveal";
 import PostWipeFadeSection from "../components/PostWipeFadeSection";
 import FooterReveal from "../components/FooterReveal";
 import TeamZemoModel from "../components/TeamZemoModel";
 import RendererTool from "../tools/RendererTool";
-import WipeTransition from "../components/WipeTransition";
+
 import RedWipeTransition from "../components/RedWipeTransition";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -66,12 +68,12 @@ const HomePage = ({ setProgress, setModelLoaded }) => {
 
           // PHASE 2 → shrink + fly to top-left (quote → exit)
           .to(obj, {
-            x: isMobile ? -1.5 : -3.3, // Mobile: smaller left shift
+            x: isMobile ? -1.5 : -3.15, // Mobile: smaller left shift
             y: isMobile ? 2.5 : 1.3, // Mobile: higher up
-            scale: isMobile ? 0.15 : 0.18,
+            scale: isMobile ? 0.15 : 0.15,
             ease: "power1.inOut",
           });
-      }
+      },
     );
 
     return () => mm.revert();
@@ -132,7 +134,7 @@ const HomePage = ({ setProgress, setModelLoaded }) => {
           ease: "power3.out",
           duration: 1.5,
         });
-      }
+      },
     );
 
     return () => mm.revert();
@@ -223,8 +225,10 @@ const HomePage = ({ setProgress, setModelLoaded }) => {
       </section>
 
       <HorizontalProjects />
-      <WipeTransition />
-      <TeamReveal />
+      <AboutInitiater />
+      <AboutLiftTransition />
+      {/* <WipeTransition /> */}
+      {/* <TeamReveal /> */}
       {/* <RedWipeTransition /> */}
       <PostWipeFadeSection />
       <FooterReveal />
