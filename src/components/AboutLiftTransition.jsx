@@ -50,7 +50,7 @@ const AboutLiftTransition = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative z-30 h-[130vh] w-full bg-white"
+      className="relative z-0 h-screen w-full bg-[rgba(255,190,210,0.55)]"
     >
       <div
         ref={panelRef}

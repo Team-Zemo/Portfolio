@@ -30,7 +30,7 @@ const PostWipeFadeSection = () => {
     <section
       id="post-wipe"
       ref={sectionRef}
-      className="relative z-10 -mt-[100vh] min-h-screen w-full bg-white px-10 pt-[100vh] flex items-center justify-center"
+      className=" z-0  min-h-screen w-full bg-[rgba(255,190,210,0.55)]   flex items-center justify-center"
     >
       <div className="max-w-3xl text-center space-y-6">
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900">

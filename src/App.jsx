@@ -1,4 +1,4 @@
-// src/App.jsx
+
 import React, { useState, useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
@@ -15,7 +15,6 @@ export default function App() {
   const [timeProgress, setTimeProgress] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
-  // 1. Artificial Delay (Min 1.5s)
   useEffect(() => {
     const startTime = Date.now();
     const duration = 1500;
@@ -25,31 +24,22 @@ export default function App() {
       const p = Math.min(100, (elapsed / duration) * 100);
       setTimeProgress(p);
 
-      if (p < 100) {
-        requestAnimationFrame(updateTimeProgress);
-      }
+      if (p < 100) requestAnimationFrame(updateTimeProgress);
     };
+
     requestAnimationFrame(updateTimeProgress);
   }, []);
 
-  // 2. Check for all images loaded
   useEffect(() => {
     const checkImages = () => {
       const images = Array.from(document.images);
-      // If no images, we consider them loaded.
-      // We also check if every image is complete.
       const allLoaded =
         images.length === 0 || images.every((img) => img.complete);
 
-      if (allLoaded) {
-        setImagesLoaded(true);
-      }
+      if (allLoaded) setImagesLoaded(true);
     };
 
-    // Check periodically
     const interval = setInterval(checkImages, 100);
-
-    // Also check on window load event
     window.addEventListener("load", checkImages);
 
     return () => {
@@ -58,23 +48,14 @@ export default function App() {
     };
   }, []);
 
-  // Calculate effective progress:
-  // It is the MINIMUM of:
-  // - Real Model Progress
-  // - Time Progress (enforces 1.5s duration)
-  // - Image Loading Status (caps at 99% until images are done)
   const effectiveProgress = Math.min(
     progress,
     timeProgress,
     imagesLoaded ? 100 : 99
   );
 
-  // Determine if loading is complete
-  // We use effectiveProgress >= 100 which implies:
-  // model is done (progress=100), time is done (1.5s), images are done (imagesLoaded=true)
   const fullyLoaded = modelLoaded && effectiveProgress >= 100;
 
-  // LENIS SMOOTH SCROLL
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.1,
@@ -82,9 +63,16 @@ export default function App() {
       easing: (t) => 1 - Math.pow(1 - t, 3),
     });
 
+    // Sync Lenis with ScrollTrigger
+    lenis.on("scroll", ScrollTrigger.update);
+
     ScrollTrigger.scrollerProxy(document.body, {
       scrollTop(value) {
-        return arguments.length ? lenis.scrollTo(value) : lenis.scroll;
+        if (arguments.length) {
+          lenis.scrollTo(value, { immediate: true });
+        } else {
+          return lenis.scroll;
+        }
       },
       getBoundingClientRect() {
         return {
@@ -94,17 +82,19 @@ export default function App() {
           height: window.innerHeight,
         };
       },
-      pinType: "fixed",
+      pinType: document.body.style.transform ? "transform" : "fixed",
     });
 
     function raf(time) {
       lenis.raf(time);
-      ScrollTrigger.update();
       requestAnimationFrame(raf);
     }
+
     requestAnimationFrame(raf);
 
-    // Stop scrolling while loading
+    ScrollTrigger.addEventListener("refresh", () => lenis.resize());
+    ScrollTrigger.refresh();
+
     if (!fullyLoaded) {
       lenis.stop();
       document.body.style.overflow = "hidden";
@@ -113,26 +103,15 @@ export default function App() {
       document.body.style.overflow = "auto";
     }
 
-    return () => lenis.destroy();
-  }, [fullyLoaded]); // Add fullyLoaded to dependency array to toggle scroll
+    return () => {
+      lenis.destroy();
+    };
+  }, [fullyLoaded]);
 
   return (
     <>
-      {/* 1. LOADING OVERLAY 
-         We render this on top using z-index/fixed positioning.
-         We remove it from DOM only when fullyLoaded is true.
-      */}
       {!fullyLoaded && (
-        <div
-          className="fixed inset-0 z-9999 bg-white"
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-          }}
-        >
+        <div className="fixed inset-0 z-9999 bg-white">
           <LoadingPage progress={effectiveProgress} />
         </div>
       )}
@@ -149,3 +128,4 @@ export default function App() {
     </>
   );
 }
+

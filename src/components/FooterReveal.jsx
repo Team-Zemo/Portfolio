@@ -76,7 +76,7 @@ export default function FooterReveal() {
     <section
       id="footer-section"
       ref={footerRef}
-      className="relative min-h-[120vh] bg-transparent overflow-hidden"
+      className="relative min-h-[120vh] bg-[rgba(255,190,210,0.55)] overflow-hidden"
     >
       <div
         ref={panelRef}

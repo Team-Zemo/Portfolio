@@ -141,7 +141,7 @@ const HomePage = ({ setProgress, setModelLoaded }) => {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative bg-[rgba(255,190,210,0.55)]">
       <div className="fixed inset-0 z-10 pointer-events-none">
         <RendererTool
           onProgress={setProgress}
