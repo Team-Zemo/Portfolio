@@ -157,7 +157,7 @@ const HorizontalProjects = () => {
     >
       <div
         ref={frameRef}
-        className="mx-auto h-screen overflow-hidden bg-[#f8f2e5]"
+        className="mx-auto h-screen overflow-hidden bg-[#fcf7ec]"
       >
         <div className="mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-5 pb-6 md:px-10 md:pt-8 md:pb-10">
           <div className="mb-4 md:mb-6">

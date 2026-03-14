@@ -54,7 +54,7 @@ const AboutLiftTransition = () => {
     >
       <div
         ref={panelRef}
-        className="mx-auto flex h-screen w-full items-end overflow-hidden bg-[#efefe8] px-5 pb-12 md:px-10 md:pb-16"
+        className="mx-auto flex h-screen w-full items-end overflow-hidden bg-[#fcf7ec] px-5 pb-12 md:px-10 md:pb-16"
       >
         <div className="mx-auto w-full max-w-[1700px]">
           <h3 className="mt-3 max-w-5xl text-[clamp(2.1rem,6.1vw,6.2rem)] font-black leading-[0.92] tracking-[-0.02em] text-[#071f06]">

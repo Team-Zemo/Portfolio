@@ -17,7 +17,7 @@ const stats = [
 
 const AboutInitiater = () => {
   return (
-    <section className="w-full bg-[#efefe8] px-4 py-14 md:px-8 md:py-24 lg:px-12">
+    <section className="w-full bg-[#fcf7ec] px-4 py-14 md:px-8 md:py-24 lg:px-12">
       <div className="mx-auto w-full max-w-[1760px]">
         <h2 className="max-w-7xl text-[clamp(2.75rem,8.8vw,9.2rem)] font-black leading-[0.9] tracking-[-0.02em] text-[#071f06]">
           Great work for
