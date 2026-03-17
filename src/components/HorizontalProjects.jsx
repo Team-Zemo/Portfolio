@@ -7,24 +7,19 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
   {
     id: 1,
-    title: "Omninet Core",
-    subtitle: "Team Zemo / Infrastructure Layer",
-    image: "/projects/first.jpg",
-    tech: "Spring Boot • Modular Runtime • AI Voice Stack",
+    title: "Placement Portal",
+    subtitle: "Campus Drive Coordination Platform",
+    image: "/projects/first.png",
+    tech: "Student Workflow • Recruiter Access • Drive Tracking",
     description: [
-      "Speech-enabled backend architecture for realtime AI voice workflows.",
-      "Adaptive modular runtime for AI pipelines and multi-agent flows.",
-      "Hierarchical NoteManager workflow system for advanced task routing.",
-      "AI chat engine with persistent contextual memory threads.",
+      "Unified placement workflow for students, coordinators, and hiring teams.",
+      "Centralized job postings, applications, and drive schedule management.",
+      "Built to streamline campus recruitment and reduce manual coordination overhead.",
     ],
     links: [
       {
-        label: "Backend Repo",
-        url: "https://github.com/Team-Zemo/omninet-core",
-      },
-      {
-        label: "Frontend Repo",
-        url: "https://github.com/Team-Zemo/omninet-security-web",
+        label: "Live Project",
+        url: "https://cdc.acropolis.teamzemo.tech/",
       },
     ],
   },
@@ -33,7 +28,7 @@ const projects = [
     id: 2,
     title: "Aeigies Core",
     subtitle: "AI Misuse Detection / Security Engine",
-    image: "/projects/second.jpg",
+    image: "/projects/second.png",
     tech: "Realtime Defense • Pattern Rules • Enforcement Layer",
     description: [
       "High-speed prompt misuse detection with multilayer auditing.",
@@ -56,7 +51,7 @@ const projects = [
     id: 3,
     title: "Swayog",
     subtitle: "Pose Engine / Live CV Feedback",
-    image: "/projects/third.jpg",
+    image: "/projects/third.png",
     tech: "FastAPI • Realtime CV • Socket Streams",
     description: [
       "AI-driven posture analysis engine designed for realtime corrective feedback.",
@@ -79,59 +74,26 @@ const HorizontalProjects = () => {
     const frame = frameRef.current;
     if (!section || !frame) return;
 
-    // Start narrow with rounded top corners, then expand as section pins.
     gsap.set(frame, {
-      width: "86vw",
-      borderTopLeftRadius: 38,
-      borderTopRightRadius: 38,
-      borderBottomLeftRadius: 0,
-      borderBottomRightRadius: 0,
+      y: 42,
+      borderRadius: 30,
     });
 
-    const introTween = gsap.to(frame, {
-      width: "100vw",
-      borderTopLeftRadius: 18,
-      borderTopRightRadius: 18,
+    const smoothTween = gsap.to(frame, {
+      y: 0,
+      borderRadius: 22,
       ease: "none",
       scrollTrigger: {
         trigger: section,
-        start: "top 20%",
-        end: "top top",
-        scrub: true,
+        start: "top 82%",
+        end: "bottom 18%",
+        scrub: 0.9,
         invalidateOnRefresh: true,
       },
     });
 
-    const trigger = ScrollTrigger.create({
-      trigger: section,
-      start: "top top",
-      end: () => `+=${window.innerHeight * 1.6}`,
-      pin: true,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        // Keep full width while pinned, then shrink back in the final 20%.
-        const outroStart = 0.8;
-        const outroProgress = Math.min(
-          Math.max((self.progress - outroStart) / (1 - outroStart), 0),
-          1,
-        );
-
-        const widthVw = 100 - outroProgress * 14;
-        const bottomRadius = outroProgress * 30;
-        const upShiftPx = outroProgress * window.innerHeight * 0.16;
-
-        frame.style.width = `${widthVw}vw`;
-        frame.style.borderBottomLeftRadius = `${bottomRadius}px`;
-        frame.style.borderBottomRightRadius = `${bottomRadius}px`;
-        frame.style.transform = `translateY(-${upShiftPx}px)`;
-      },
-    });
-
-    setTimeout(() => ScrollTrigger.refresh(), 120);
-
     return () => {
-      introTween.kill();
-      trigger.kill();
+      smoothTween.kill();
     };
   }, []);
 
@@ -153,21 +115,21 @@ const HorizontalProjects = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[180vh] bg-[rgba(255,190,210,0.55)] text-[#19261a]"
+      className="relative w-full bg-[rgba(255,190,210,0.55)] py-8 text-[#19261a] md:py-12"
     >
       <div
         ref={frameRef}
-        className="mx-auto h-screen overflow-hidden bg-[#fcf7ec]"
+        className="mx-auto w-[95vw] max-w-[1650px] overflow-hidden rounded-[1.35rem] bg-[#fcf7ec] md:w-[96vw] md:rounded-[1.8rem]"
       >
-        <div className="mx-auto flex h-full w-full max-w-[1600px] flex-col px-4 pt-5 pb-6 md:px-10 md:pt-8 md:pb-10">
+        <div className="mx-auto flex min-h-svh w-full max-w-[1600px] flex-col px-4 pt-5 pb-6 md:min-h-screen md:px-10 md:pt-8 md:pb-10">
           <div className="mb-4 md:mb-6">
-            <h2 className="mt-2 text-[2.25rem] font-primary leading-[0.95] text-[#000000] md:text-[5rem] lg:text-[6rem]">
+            <h2 className="mt-2 text-[2.1rem] font-primary font-semibold leading-[0.95] text-[#000000] md:text-[5rem] lg:text-[6rem]">
               Digital Experiences
             </h2>
           </div>
 
           <div className="flex flex-1 items-center justify-center py-2 md:py-3">
-            <div className="relative h-[80vh] w-full max-w-[1300px] overflow-hidden rounded-[1.75rem] bg-[#f8f2e5] shadow-[0_20px_60px_rgba(60,48,22,0.16)] md:h-[70vh]">
+            <div className="relative h-[76svh] w-full max-w-[1300px] overflow-hidden rounded-[1.3rem] bg-[#f8f2e5] shadow-[0_20px_60px_rgba(60,48,22,0.16)] md:h-[70vh] md:rounded-[1.75rem]">
               {projects.map((project, idx) => {
                 const isActive = idx === activeIndex;
 
@@ -181,7 +143,7 @@ const HorizontalProjects = () => {
                     }`}
                   >
                     <div className="grid h-full grid-cols-1 md:grid-cols-12">
-                      <div className="relative h-[34vh] md:col-span-7 md:h-full">
+                      <div className="relative h-[29svh] md:col-span-7 md:h-full">
                         <img
                           src={project.image}
                           alt={`${project.title} preview`}
@@ -190,12 +152,12 @@ const HorizontalProjects = () => {
                         <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#0c140d]/18 via-transparent to-transparent" />
                       </div>
 
-                      <div className="md:col-span-5 flex h-full flex-col bg-[#f8f2e5] p-5 md:p-8 lg:p-10">
+                      <div className="flex h-full flex-col bg-[#f8f2e5] p-4 pb-20 md:col-span-5 md:p-8 md:pb-8 lg:p-10">
                         <p className="text-[10px] uppercase tracking-[0.22em] text-[#3e5f39] md:text-xs">
                           {project.subtitle}
                         </p>
 
-                        <h3 className="mt-2 text-3xl font-primary leading-tight text-[#122111] md:text-5xl">
+                        <h3 className="mt-2 text-2xl font-primary leading-tight text-[#122111] md:text-5xl">
                           {project.title}
                         </h3>
 
@@ -205,13 +167,13 @@ const HorizontalProjects = () => {
 
                         <div className="my-4 h-px bg-[#231008] md:my-5" />
 
-                        <div className="space-y-2.5 text-[13px] leading-[1.55] text-[#294028] md:text-[15px]">
+                        <div className="flex-1 space-y-2 overflow-y-auto pr-1 text-[12px] leading-normal text-[#294028] md:space-y-2.5 md:text-[15px]">
                           {project.description.map((line, lineIndex) => (
                             <p key={lineIndex}>{line}</p>
                           ))}
                         </div>
 
-                        <div className=" pt-5">
+                        <div className="pt-4 md:pt-5">
                           <div className="flex flex-wrap gap-2.5">
                             {project.links.map((lnk, linkIndex) => (
                               <a
@@ -255,7 +217,7 @@ const HorizontalProjects = () => {
                     aria-label="Previous project"
                     onClick={goPrev}
                     disabled={activeIndex === 0}
-                    className="h-11 w-11 rounded-full border border-[#9aae8f] bg-[#f7efd8] text-xl font-bold text-[#244023] transition-colors hover:bg-[#ecdfbd] disabled:cursor-not-allowed disabled:opacity-45"
+                    className="h-10 w-10 rounded-full border border-[#9aae8f] bg-[#f7efd8] text-lg font-bold text-[#244023] transition-colors hover:bg-[#ecdfbd] disabled:cursor-not-allowed disabled:opacity-45 md:h-11 md:w-11 md:text-xl"
                   >
                     &lt;
                   </button>
@@ -264,7 +226,7 @@ const HorizontalProjects = () => {
                     aria-label="Next project"
                     onClick={goNext}
                     disabled={activeIndex === projects.length - 1}
-                    className="h-11 w-11 rounded-full border border-[#9aae8f] bg-[#f7efd8] text-xl font-bold text-[#244023] transition-colors hover:bg-[#ecdfbd] disabled:cursor-not-allowed disabled:opacity-45"
+                    className="h-10 w-10 rounded-full border border-[#9aae8f] bg-[#f7efd8] text-lg font-bold text-[#244023] transition-colors hover:bg-[#ecdfbd] disabled:cursor-not-allowed disabled:opacity-45 md:h-11 md:w-11 md:text-xl"
                   >
                     &gt;
                   </button>
@@ -276,7 +238,7 @@ const HorizontalProjects = () => {
       </div>
 
       <div className="mx-auto flex  w-full max-w-7xl flex-col items-center justify-center px-6  lg:mt-10  text-center">
-        <p className="max-w-5xl text-5xl font-primary  text-[#132313]  md:text-6xl lg:text-7xl md:mt-5">
+        <p className="max-w-5xl text-5xl font-primary font-semibold  text-[#132313]  md:text-6xl lg:text-7xl md:mt-5">
           We design, build and ship world-class digital products for
           forward-thinking brands.
         </p>

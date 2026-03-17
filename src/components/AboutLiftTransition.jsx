@@ -50,11 +50,11 @@ const AboutLiftTransition = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative z-0 h-screen w-full bg-[rgba(255,190,210,0.55)]"
+      className="relative z-0 h-[20vh] w-full bg-[rgba(255,190,210,0.55)] md:h-screen"
     >
       <div
         ref={panelRef}
-        className="mx-auto flex h-screen w-full items-end overflow-hidden bg-[#fcf7ec] px-5 pb-12 md:px-10 md:pb-16"
+        className="mx-auto flex h-[72vh] w-full items-start overflow-hidden bg-[#fcf7ec] px-5 pt-50 pb-10 md:h-screen md:items-end md:px-10 md:pt-0 md:pb-16"
       >
         <div className="mx-auto w-full max-w-[1700px]">
           <h3 className="mt-3 max-w-5xl text-[clamp(2.1rem,6.1vw,6.2rem)] font-black leading-[0.92] tracking-[-0.02em] text-[#071f06]">

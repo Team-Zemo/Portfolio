@@ -17,7 +17,7 @@ const stats = [
 
 const AboutInitiater = () => {
   return (
-    <section className="w-full bg-[#fcf7ec] px-4 py-14 md:px-8 md:py-24 lg:px-12">
+    <section className="w-full bg-[#fcf7ec] px-4 pt-14 pb-6 md:px-8 md:py-24 lg:px-12">
       <div className="mx-auto w-full max-w-[1760px]">
         <h2 className="max-w-7xl text-[clamp(2.75rem,8.8vw,9.2rem)] font-black leading-[0.9] tracking-[-0.02em] text-[#071f06]">
           Great work for
@@ -52,26 +52,23 @@ const AboutInitiater = () => {
               />
             </div>
 
-         <div className="mt-8 border-t border-[#d8d8ce] md:mt-80">
-  {stats.map((item, idx) => (
-    <div
-      key={item.value}
-      className={`grid grid-cols-[auto,1fr] gap-3 border-b border-[#d8d8ce] py-4 md:gap-6 md:py-6 ${
-        idx === 0 ? "pt-5 md:pt-6" : ""
-      }`}
-    >
-      <p className="min-w-12 text-4xl font-black leading-tight tracking-[0.01em] text-[#071f06]">
-        {item.value}
-        <p className="max-w-[20ch] text-[clamp(1.1rem,1.6vw,2rem)] font-semibold text-[#1b2e1d] leading-tight">
-        {item.label}
-      </p>
-      </p>
-
-      
-    </div>
-  ))}
-</div>
-
+            <div className="mt-8 border-t border-[#d8d8ce] md:mt-80">
+              {stats.map((item, idx) => (
+                <div
+                  key={item.value}
+                  className={`grid grid-cols-[auto,1fr] gap-3 border-b border-[#d8d8ce] py-4 md:gap-6 md:py-6 ${
+                    idx === 0 ? "pt-5 md:pt-6" : ""
+                  }`}
+                >
+                  <p className="min-w-12 text-4xl font-black leading-tight tracking-[0.01em] text-[#071f06]">
+                    {item.value}
+                    <p className="max-w-[20ch] text-[clamp(1.1rem,1.6vw,2rem)] font-semibold text-[#1b2e1d] leading-tight">
+                      {item.label}
+                    </p>
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="hidden xl:col-span-7 xl:block">
