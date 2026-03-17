@@ -121,7 +121,7 @@ const HorizontalProjects = () => {
         ref={frameRef}
         className="mx-auto w-[95vw] max-w-[1650px] overflow-hidden rounded-[1.35rem] bg-[#fcf7ec] md:w-[96vw] md:rounded-[1.8rem]"
       >
-        <div className="mx-auto flex min-h-svh w-full max-w-[1600px] flex-col px-4 pt-5 pb-6 md:min-h-screen md:px-10 md:pt-8 md:pb-10">
+        <div className="mx-auto flex  w-full max-w-[1600px] flex-col px-4 pt-5 pb-6 md:min-h-screen md:px-10 md:pt-8 md:pb-10">
           <div className="mb-4 md:mb-6">
             <h2 className="mt-2 text-[2.1rem] font-primary font-semibold leading-[0.95] text-[#000000] md:text-[5rem] lg:text-[6rem]">
               Digital Experiences
@@ -237,7 +237,7 @@ const HorizontalProjects = () => {
         </div>
       </div>
 
-      <div className="mx-auto flex  w-full max-w-7xl flex-col items-center justify-center px-6  lg:mt-10  text-center">
+      <div className="mx-auto flex  w-full max-w-7xl flex-col items-center justify-center px-6 mb-40 lg:mt-50 mt-50 lg:mb-40 text-center">
         <p className="max-w-5xl text-5xl font-primary font-semibold  text-[#132313]  md:text-6xl lg:text-7xl md:mt-5">
           We design, build and ship world-class digital products for
           forward-thinking brands.
